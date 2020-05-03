@@ -13,6 +13,7 @@ import {
   Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import api from '../../services/api';
 
 import logoImg from '../../assets/logo.png';
 import Input from '../../components/Input';
@@ -49,14 +50,14 @@ const SignUp: React.FC = () => {
         abortEarly: false,
       });
 
-      /* await api.post('/users', data); */
-
-      /* history.push('/'); */
+      await api.post('/users', data);
 
       Alert.alert(
         'Cadastro realizado com sucesso',
         'Vocẽ já pode fazer seu login no GoBarber!',
       );
+
+      navigation.navigate('SignIn');
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
